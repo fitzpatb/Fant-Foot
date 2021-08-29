@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
   // Gets all books
-  findAll: function() {
+  getArticles: function() {
     return axios.get("/api/articles/all");
   },
   // Gets the book with the given id

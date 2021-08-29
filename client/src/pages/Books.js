@@ -2,23 +2,34 @@ import React, { useState, useEffect } from "react";
 import Jumbotron from "../components/Jumbotron";
 import DeleteBtn from "../components/DeleteBtn";
 import API from "../utils/API";
+import DesPoints from "../components/DesPoints";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
 
 function Books() {
   // Initialize books as an empty array
-    const [books, setBooks] = useState([]);
+    const [articleTitle, setArticleTitle] = useState("");
+    const [articleIntro, setArticleIntro] = useState("");
+    const [descriptionsPoints, setDescriptionsPoints] = useState([]);
+
 
     useEffect(() => {
       loadBooks();
     }, []);
 
     function loadBooks() {
+      let articleArray = [];
       API.getArticles()
       .then(res => {
-        console.log(res.json)
-        setBooks(res.data)
+        console.log(res.data.articles)
+        setArticleTitle(res.data.articles[0].headline)
+        setArticleIntro(res.data.articles[0].intro);
+        for (let i = 0; i < res.data.articles[0].descriptions.length; i++) {
+          articleArray.push(res.data.articles[0].points[i]);
+          articleArray.push(res.data.articles[0].descriptions[i]);
+        }
+        setDescriptionsPoints(articleArray);
       })
       .catch(err => console.log(err));
       // Add code here to get all books from the database and store them using setBooks
@@ -29,7 +40,7 @@ function Books() {
         <Row>
           <Col size="md-6">
             <Jumbotron>
-              <h1>What Books Should I Read?</h1>
+              <h1>{articleTitle}</h1>
             </Jumbotron>
             <form>
               <Input name="title" placeholder="Title (required)" />
@@ -40,24 +51,14 @@ function Books() {
           </Col>
           <Col size="md-6 sm-12">
             <Jumbotron>
-              <h1>Books On My List</h1>
+              <DesPoints
+                points={descriptionsPoints}
+              />
             </Jumbotron>
-            {books.length ? (
-              <List>
-                {/* {books.map(book => (
-                  <ListItem key={book._id}>
-                    <a href={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
-                    </a>
-                    <DeleteBtn />
-                  </ListItem>
-                ))} */}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
+            {descriptionsPoints.map((points, index) => {
+              console.log(points)
+            })
+            }
           </Col>
         </Row>
       </Container>
