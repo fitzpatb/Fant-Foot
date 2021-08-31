@@ -6,6 +6,8 @@ import DesPoints from "../components/DesPoints";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
+import Card from "react-bootstrap/Card";
+import Accordion from "react-bootstrap/Accordion";
 
 function Books() {
   // Initialize books as an empty array
@@ -39,7 +41,7 @@ function Books() {
       <main>
         <Container fluid>
           <Row>
-            <Col size="md-6 sm-12">
+            <Col size="md-8 sm-12">
               <article>
                 <h1>{articleTitle}</h1>
                 <p>{articleIntro}</p>
@@ -48,10 +50,36 @@ function Books() {
                 />
               </article>
             </Col>
-            <Col size="md-6">
-              <Jumbotron>
-                <h1>Other Articles</h1>
-              </Jumbotron>
+            <Col size="md-4">
+              <Card>
+                <Card.Body>Recent Articles</Card.Body>
+                <Accordion>
+                  <Accordion.Item eventKey="0">
+                    <Accordion.Header>Accordion Item #1</Accordion.Header>
+                    <Accordion.Body>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                      est laborum.
+                    </Accordion.Body>
+                  </Accordion.Item>
+                  <Accordion.Item eventKey="1">
+                    <Accordion.Header>Accordion Item #2</Accordion.Header>
+                    <Accordion.Body>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                      est laborum.
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
+              </Card>
             </Col>
           </Row>
         </Container>
